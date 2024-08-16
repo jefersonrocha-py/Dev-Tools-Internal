@@ -16,6 +16,9 @@ from tqdm import tqdm
 import time
 ######################
 
+print("\033[1;34m[*]___author___: @jefersonrocha-py\033[1;37m")
+print("\033[1;34m[*]___version___: 1.0.0 alpha\033[1;37m")
+
 ###Banner para o Titulo
 def show_banner(title):
     banner = pyfiglet.figlet_format(title)
