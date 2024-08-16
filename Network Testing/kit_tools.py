@@ -1,7 +1,9 @@
+# caso aparecec erro de nmap em seu S.O Windows
 import warnings
-
 warnings.filterwarnings('ignore')
+####################
 
+#Lib necessária 
 import pyfiglet
 import socket
 import os
@@ -12,13 +14,14 @@ import hashlib
 import paramiko
 from tqdm import tqdm
 import time
+######################
 
-
+###Banner para o Titulo
 def show_banner(title):
     banner = pyfiglet.figlet_format(title)
     print(banner)
 
-
+#Menu
 def menu():
     options = [
         "[1] Port Scanner",
@@ -46,7 +49,7 @@ def is_valid_port(port):
     """Validate if the input is a valid port number."""
     return port.isdigit() and 1 <= int(port) <= 65535
 
-
+#Tool Scan Port
 def scan_port(target, port):
     """Scan a specific port on the target."""
     try:
@@ -57,7 +60,7 @@ def scan_port(target, port):
     except socket.error:
         return port, False
 
-
+# Tool Scan Port
 def port_scanner(target, ports):
     """Scan multiple ports on the target with a progress bar."""
     open_ports = []
@@ -99,7 +102,7 @@ def packet_handler(packet):
     """Handle captured packets."""
     print(packet.summary())
 
-
+# Tool Network Sniffer
 def run_network_sniffer():
     show_banner("Network Sniffer")
     interface = input("Digite a interface para escutar (ex. eth0): ")
@@ -121,7 +124,7 @@ def run_network_sniffer():
         print("\nCaptura de pacotes interrompida pelo usuário.")
     print("Captura de pacotes concluída com sucesso.")
 
-
+# Tool Brute Force para SSH
 def ssh_brute_force(target, username, password_list):
     """Perform SSH brute force attack."""
     ssh_client = paramiko.SSHClient()
@@ -162,7 +165,7 @@ def run_brute_force_attack():
     passwords = input("Digite as senhas para testar (separadas por vírgula): ").split(',')
     ssh_brute_force(target, username, passwords)
 
-
+#Tool em desenvolvindo ainda precisa corrigir
 def run_vulnerability_scanner():
     show_banner("Vulnerability Scanner")
     target = input("Digite o IP, host ou FQDN para escanear vulnerabilidades: ")
@@ -178,7 +181,7 @@ def run_vulnerability_scanner():
         print("\nScan de vulnerabilidades interrompido pelo usuário.")
     print("Scan de vulnerabilidades concluído com sucesso.")
 
-
+#Tool ARP Spoofing
 def arp_spoof(target, spoof_ip):
     """Perform ARP spoofing."""
     packet = ARP(op=2, pdst=target, psrc=spoof_ip)
@@ -212,7 +215,7 @@ def run_arp_spoofing():
         print("\nARP spoofing interrompido pelo usuário.")
     print("ARP spoofing concluído com sucesso.")
 
-
+# Tool Password Cracker
 def password_cracker(hash_to_crack, wordlist):
     """Crack an MD5 hash using a wordlist with progress."""
     try:
@@ -241,7 +244,7 @@ def run_password_cracker():
     wordlist = input("Digite o caminho do arquivo wordlist: ")
     password_cracker(hash_to_crack, wordlist)
 
-
+# Tool DoS Attack
 def dos_attack(target, port):
     """Perform a DoS attack with a progress bar."""
     client = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -272,7 +275,7 @@ def run_dos_attack():
     print(f"Executando ataque DoS contra {target}:{port}...")
     dos_attack(target, int(port))
 
-
+# Banner com a Lib PyFiglet com o nome do Script
 def main():
     show_banner("Network Testing Toolkit")
     while True:
